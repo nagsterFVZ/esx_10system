@@ -21,7 +21,6 @@ AddEventHandler('esx_10system:SendStatus', function(code)
         end
         if not stringified then text = officers[k].code end
         msg = string.format("~b~Officer: ~w~%s ~y~- ~w~%s  ~y~Status: ~w~%s", officers[k].name, officers[k].callsign, text)
-        print(string.sub(officers[k].callsign, 1, 4))
         if officers[k].code == '7' then 
 
         elseif string.sub(officers[k].callsign, 1, 4) == 'Echo' then
@@ -66,8 +65,6 @@ AddEventHandler('esx_10system:getSign', function()
         callsign = sqlResult['callsign']
         name = sqlResult['name']
 	end
-    print(callsign)
-    print(name)
 end)
 
 AddEventHandler('esx:playerDropped', function(source)
@@ -88,10 +85,10 @@ AddEventHandler('esx_10system:setPolice', function(switchDuty)
     local grade = xPlayer.job.grade
     if switchDuty then
         xPlayer.setJob('police', grade)
-        TriggerClientEvent('esx:showNotification', _source, _U('onduty'))
+        TriggerClientEvent('esx:showNotification', _source, 'You are now on duty')
     else
         xPlayer.setJob('offpolice', grade)
-        TriggerClientEvent('esx:showNotification', _source, _U('offduty'))
+        TriggerClientEvent('esx:showNotification', _source, 'You are now off duty')
     end
 
 end)
@@ -104,10 +101,10 @@ AddEventHandler('esx_10system:setAmbulance', function(switchDuty)
     local grade = xPlayer.job.grade
     if switchDuty then
         xPlayer.setJob('ambulance', grade)
-        TriggerClientEvent('esx:showNotification', _source, _U('onduty'))
+        TriggerClientEvent('esx:showNotification', _source, 'You are now on duty')
     else
         xPlayer.setJob('offambulance', grade)
-        TriggerClientEvent('esx:showNotification', _source, _U('offduty'))
+        TriggerClientEvent('esx:showNotification', _source, 'You are now off duty')
     end
 
 end)
