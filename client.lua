@@ -45,7 +45,6 @@ end)
 RegisterCommand('10system', function(source, args, rawCommand)
 	if PlayerData.job.name == 'police' or  PlayerData.job.name == 'offpolice' or  PlayerData.job.name == 'offambulance' or PlayerData.job.name == 'ambulance' then
 		showHud = not showHud
-		TriggerEvent('radialmenu:10system', -1)
 	end
 end, false)
 
