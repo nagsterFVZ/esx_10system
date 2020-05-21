@@ -4,7 +4,8 @@ local officers = {}
 
 RegisterServerEvent('esx_10system:SendStatus')
 AddEventHandler('esx_10system:SendStatus', function(code)
-    local identifier = GetPlayerIdentifiers(source)[1]
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local identifier = xPlayer.identifier
     local callsign = getSign(identifier)
     local name = getName(identifier)
     addToOfficers(identifier, callsign, name, code)
@@ -58,7 +59,8 @@ end
 
 RegisterServerEvent('esx_10system:getSign')
 AddEventHandler('esx_10system:getSign', function()
-    local identifier = GetPlayerIdentifiers(source)[1]
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local identifier = xPlayer.identifier
 	local result = MySQL.Sync.fetchAll("SELECT * FROM 10system WHERE identifier = @identifier", {['@identifier'] = identifier})
 	if result[1] ~= nil then
 		local sqlResult = result[1]
@@ -69,7 +71,8 @@ end)
 
 AddEventHandler('esx:playerDropped', function(source)
     local source = source
-    local identifier = GetPlayerIdentifiers(source)[1]
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local identifier = xPlayer.identifier
     for k in pairs(officers) do
         if k == identifier then
             officers[identifier].code = '7'
